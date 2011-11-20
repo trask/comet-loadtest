@@ -1,0 +1,15 @@
+{
+    "set_fqdn": "comet-loadtest-client",
+    "tz": "America/Los_Angeles",
+    "limits": [
+    	["ubuntu", "-", "nofile", "65536"]
+    ],
+    "run_list": [
+        "recipe[hostname]",
+        "recipe[timezone]",
+        "recipe[vim]",
+        "recipe[dircolors]",
+        "recipe[limits]",
+        "recipe[java]"
+    ]
+}
