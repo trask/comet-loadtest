@@ -16,7 +16,6 @@
 package com.github.trask.comet.loadtest.aws;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -25,9 +24,9 @@ import java.util.zip.GZIPOutputStream;
 
 import org.apache.commons.compress.archivers.tar.TarArchiveEntry;
 import org.apache.commons.compress.archivers.tar.TarArchiveOutputStream;
-import org.apache.commons.io.IOUtils;
 
 import com.github.trask.sandbox.sshj.SshSession;
+import com.google.common.io.Files;
 
 /**
  * @author Trask Stalnaker
@@ -102,7 +101,7 @@ public class ChefBootstrap {
         tarOut.putArchiveEntry(tarEntry);
 
         if (file.isFile()) {
-            IOUtils.copy(new FileInputStream(file), tarOut);
+            Files.asByteSource(file).copyTo(tarOut);
             tarOut.closeArchiveEntry();
         } else {
             tarOut.closeArchiveEntry();
